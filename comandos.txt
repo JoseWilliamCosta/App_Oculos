@@ -1,0 +1,7 @@
+// Imports de ícones do FontAwesome
+//import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+//import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
+//-----------------------
+//cmd para instalar os ícones
+//npm install @fortawesome/react-native-fontawesome @fortawesome/free-solid-svg-icons
+//------------------------
