@@ -79,11 +79,6 @@ export default function Signup() {
         <View style={styles.containerTop}>
             <View style={styles.containerbox}>
                 <Text style={styles.titulo1}>Dados de Usuário</Text>
-                <Text style={styles.label}>Id. Usuário:</Text>
-                <TextInput style={styles.input}
-                    value={idUsuario}
-                    onChangeText={(idUsuario => setIdUsuario(idUsuario))}
-                />
                 <Text style={styles.label}>Nome:</Text>
                 <TextInput style={styles.input}
                     value={nome}

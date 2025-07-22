@@ -44,7 +44,7 @@ export default function DadosUsuario() {
                 //setLoad(true)
                 route.params = null
             };
-        }, [])
+        }, [route.params.idusuario])
     );
 
     let getUsuario = async () => {
@@ -69,7 +69,36 @@ export default function DadosUsuario() {
     }
 
     const update = async () => {
+        try {
+            console.log(`${server}/usuarios/update`)
+            const res = await axios.post(`${server}/usuarios/update`, {
+                idusuario: idusuario,
+                nome: nome,
+                cpf: cpf,
+                telefone: telefone,
+                email: email,
+                password: password,
+            })
 
+
+            if (res.data.num_erro == 0) {
+
+
+                alert(res.data.msg)
+                navigation.goBack()
+            }
+
+
+            if (res.data.num_erro == 1) {
+                alert(res.data.msg_erro)
+            }
+
+
+        } catch (e) {
+            //showError(e)
+            console.log(e)
+            alert(e)
+        }
     }
 
 

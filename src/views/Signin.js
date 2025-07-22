@@ -67,7 +67,7 @@ export default function Signin() {
             <View style={styles_login.areaimagem}>
                 <Image
                     source={require('../img/img1_aurora.jpg')}
-                    style={{ width: '100%', height: 400 }}
+                    style={{ width: '90%', height: 400 }}
                     resizeMode="contain"
                 />
             </View>

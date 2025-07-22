@@ -50,6 +50,13 @@ export default function AreaUsuario() {
             >
                 <Text style={styles.card}>Listar Usuários</Text>
             </TouchableOpacity>
+
+
+            <TouchableOpacity
+                //onPress={}
+            >
+                <Text style={styles.card}>Listar Óculos</Text>
+            </TouchableOpacity>
         </View>
     )
 }

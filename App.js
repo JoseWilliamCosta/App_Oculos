@@ -9,7 +9,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import Signin from './src/views/Signin'
 import AreaUsuario from "./src/views/AreaUsuario";
 import Signup from './src/views/Signup'
-import ListarUsuarios from "./src/views/ListarUsuarios";
+import ListarUsuarios from "./src/views/admin/ListarUsuarios";
 import DadosUsuario from "./src/views/DadosUsuario";
 
 
