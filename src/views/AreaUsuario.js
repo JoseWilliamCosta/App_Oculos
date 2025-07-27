@@ -16,12 +16,23 @@ import axios from 'axios'
 // Imports para parâmetros do Sistema
 import { server } from '../globals/GlobalVars';
 
+// Hook para esconder/mostra botões
+import useUsuarioLogado from "./admin/useUsuarioLogado";
+
 // Bibliotecas do Navigation
 import { useNavigation } from '@react-navigation/native';
 
 export default function AreaUsuario() {
 
     const navigation = useNavigation()
+
+    const usuario = useUsuarioLogado()
+
+    if (!usuario) return null // ou um loader "Carregando..."
+
+    const navtoPerfilUsuario = () => {
+        navigation.navigate('PerfilUsuario')
+    }
 
     const navtoSignup = () => {
         navigation.navigate('Signup')
@@ -31,32 +42,42 @@ export default function AreaUsuario() {
         navigation.navigate('ListarUsuarios')
     }
 
+    const navListaOculos = () => {
+        navigation.navigate('ListarOculos')
+    }
+
     return (
         <View style={styles.container}>
-            <TouchableOpacity
-            //onPress={navtoPerfilUsuario}
-            >
+            <TouchableOpacity onPress={navtoPerfilUsuario}>
                 <Text style={styles.card}>Perfil do Usuário</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-            onPress={navtoSignup}
-            >
-                <Text style={styles.card}>Cadastrar Usuário</Text>
-            </TouchableOpacity>
+            {usuario.tipo === 'admin' && (
+                <>
+                    <TouchableOpacity onPress={navtoSignup}>
+                        <Text style={styles.card}>Cadastrar Usuário</Text>
+                    </TouchableOpacity>
 
-            <TouchableOpacity
-                onPress={navListUsuarios}
-            >
-                <Text style={styles.card}>Listar Usuários</Text>
-            </TouchableOpacity>
+                    <TouchableOpacity onPress={navListUsuarios}>
+                        <Text style={styles.card}>Listar Usuários</Text>
+                    </TouchableOpacity>
 
+                    <TouchableOpacity onPress={navListaOculos}>
+                        <Text style={styles.card}>Listar Óculos</Text>
+                    </TouchableOpacity>
+                </>
+            )}
 
-            <TouchableOpacity
-                //onPress={}
-            >
-                <Text style={styles.card}>Listar Óculos</Text>
-            </TouchableOpacity>
+            {usuario.tipo === 'comum' && (
+                <>
+
+                <TouchableOpacity /*onPress={}*/>
+                        <Text style={styles.card}>!!</Text>
+                </TouchableOpacity>
+                    <Text>Você é um usuário comum</Text>
+
+                </>
+            )}
         </View>
     )
 }

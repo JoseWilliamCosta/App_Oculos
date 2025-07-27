@@ -11,7 +11,7 @@ import { View, Text, TextInput, Image, TouchableOpacity } from "react-native"
 
 
 // Import de estilos da IG
-import styles from '../globals/GlobalStyles'
+import styles from '../../globals/GlobalStyles'
 
 
 //Imports para acesso ao BD
@@ -19,7 +19,7 @@ import axios from 'axios'
 
 
 // Imports para parâmetros do Sistema
-import { server } from '../globals/GlobalVars';
+import { server } from '../../globals/GlobalVars';
 
 
 // Bibliotecas do Navigation

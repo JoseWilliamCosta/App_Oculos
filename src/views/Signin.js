@@ -3,6 +3,8 @@ import React from "react";
 
 //Import temporário para armazenar as variáveis que ficarão no UseContext
 import { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../components/UserContext";
 
 // Imports de componentes para IG do React
 import { View, Text, TextInput, Image, TouchableOpacity, ScrollView } from "react-native"
@@ -15,6 +17,10 @@ import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 //cmd para instalar os ícones
 //npm install @fortawesome/react-native-fontawesome @fortawesome/free-solid-svg-icons
 //------------------------
+
+// Biblioteca para armazenamento local persistente (armazenar usuário logado etc)
+// cmd para instalar: npm install @react-native-async-storage/async-storage
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 // Import de estilos da IG
 import styles from '../globals/GlobalStyles'
@@ -30,9 +36,12 @@ import { useNavigation } from '@react-navigation/native';
 import { prerenderToNodeStream } from "react-dom/static";
 import { height, width } from "@fortawesome/free-solid-svg-icons/fa0";
 
+
+
 export default function Signin() {
     const [email, setEmail] = useState('admin@gmail.com')
     const [password, setPassword] = useState('123456')
+    const { setUsuario } = useContext(UserContext); // 👈 Aqui
 
     const navigation = useNavigation()
 
@@ -46,9 +55,16 @@ export default function Signin() {
             )
 
             if (res.data.num_erro == 0) {
+                const usuario = res.data.res
 
+                // Armazenar os dados do usuário no AsyncStorage
+                await AsyncStorage.setItem('usuarioLogado', JSON.stringify(usuario))
+                setUsuario(usuario); // 👈 Atualiza o contexto global
                 alert(res.data.msg)
-                navigation.navigate('AreaUsuario')
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: 'AreaUsuario' }],
+                });
             }
 
             if (res.data.num_erro == 1) {
@@ -64,19 +80,18 @@ export default function Signin() {
 
     return (
         <ScrollView contentContainerStyle={styles_login.container_login}>
-            <View style={styles_login.areaimagem}>
-                <Image
-                    source={require('../img/img1_aurora.jpg')}
-                    style={{ width: '90%', height: 400 }}
-                    resizeMode="contain"
-                />
-            </View>
+
+            <Image style={styles_login.areaimagem}
+                source={require('../img/img1_aurora.jpg')}
+                resizeMode="cover" />
+
+
             <View style={styles_login.container}>
 
                 <View style={styles_login.arealogo}>
                     <Image
                         source={require('../img/logo_aurora.png')}
-                        style={{ width: 500, height: 200 }}
+                        style={{ width: 200, height: 80, resizeMode: 'contain' }}
                     />
                 </View>
                 <View style={styles_login.card_login}>
@@ -120,18 +135,28 @@ export default function Signin() {
 const styles_login = ({
     container_login: {
         justifyContent: 'center',
+        width: '100%',
+        height: '100%',
         alignItems: 'center',
         backgroundColor: '#fff',
     },
     container: {
         width: '100%',
-        height: '500px',
+        height: 370,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        borderTopWidth: 1,
+        borderLeftWidth: 1,
+        borderTopLeftRadius: 45,
+        borderTopRightRadius: 45,
+        marginTop: -50, // <- aqui está o segredo
+        backgroundColor: '#fff', // Certifique-se que o fundo cubra a imagem
+        paddingBottom: 40, // espaço inferior extra
     },
     areaimagem: {
         width: '100%',
+        height: '60%',
         backgroundColor: '#f0f0f0',
         justifyContent: 'center',
         alignItems: 'center',
@@ -139,14 +164,7 @@ const styles_login = ({
     },
     arealogo: {
         width: '100%',
-        height: 200,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    containerbox_login: {
-        width: '100%',
-        height: 700,
-        display: 'flex',
+        height: 100,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -165,7 +183,8 @@ const styles_login = ({
         borderColor: '#ccc',
         marginBottom: 25,
         paddingVertical: 5,
-        width: '40%',
+        width: '80%', // Aumentado para dar mais espaço
+        maxWidth: 400, // Limite para telas grandes
     },
     icon: {
         marginRight: 10,

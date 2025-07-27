@@ -5,3 +5,10 @@
 //cmd para instalar os ícones
 //npm install @fortawesome/react-native-fontawesome @fortawesome/free-solid-svg-icons
 //------------------------
+//-----------------------
+// cmd para instalar os ícones
+// npm install @fortawesome/react-native-fontawesome @fortawesome/free-solid-svg-icons
+//------------------------
+// Biblioteca para armazenamento local persistente (armazenar usuário logado etc)
+// cmd para instalar: npm install @react-native-async-storage/async-storage
+// import AsyncStorage from '@react-native-async-storage/async-storage'
