@@ -1,3 +1,4 @@
+// não precisa mexer nessa tela agora///
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import styles from '../globals/GlobalStyles';

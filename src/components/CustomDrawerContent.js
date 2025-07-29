@@ -4,7 +4,7 @@ import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { View, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
-import { UserContext } from './UserContext';
+import { UserContext } from '../globals/UserContext';
 
 export default function CustomDrawerContent(props) {
   const { usuario, setUsuario } = useContext(UserContext);

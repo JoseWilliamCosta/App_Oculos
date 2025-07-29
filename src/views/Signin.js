@@ -4,7 +4,7 @@ import React from "react";
 //Import temporário para armazenar as variáveis que ficarão no UseContext
 import { useState } from "react";
 import { useContext } from "react";
-import { UserContext } from "../components/UserContext";
+import { UserContext } from "../globals/UserContext";
 
 // Imports de componentes para IG do React
 import { View, Text, TextInput, Image, TouchableOpacity, ScrollView } from "react-native"
