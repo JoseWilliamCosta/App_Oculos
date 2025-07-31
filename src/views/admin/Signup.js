@@ -8,7 +8,7 @@ import { useState } from "react";
 
 // Imports de componentes para IG do React
 import { View, Text, TextInput, Image, TouchableOpacity } from "react-native"
-
+import { StyleSheet } from 'react-native';
 
 // Import de estilos da IG
 import styles from '../../globals/GlobalStyles'
@@ -77,8 +77,16 @@ export default function Signup() {
 
     return (
         <View style={styles.containerTop}>
+
+            <View style={{ backgroundColor: '#fff', justifyContent: 'center', alignItems: 'center', width: '100%',height: '30%', }}>
+                <Text style={[styles.titulo1, { textAlign: 'left',  lineHeight: 30}]}>
+                    Faça parte da{'\n'}nossa comunidade!
+                </Text>
+            </View>
+
+
             <View style={styles.containerbox}>
-                <Text style={styles.titulo1}>Dados de Usuário</Text>
+                
                 <Text style={styles.label}>Nome:</Text>
                 <TextInput style={styles.input}
                     value={nome}
@@ -105,12 +113,16 @@ export default function Signup() {
                     onChangeText={password => setPassword(password)}
                     secureTextEntry={true}
                 />
-                <TouchableOpacity
-                    onPress={signup}
-                >
+                <br></br>
+                
+                <TouchableOpacity style={{width:'250px',alignSelf: 'center' }} onPress={signup}>
                     <Text style={styles.button}>OK</Text>
                 </TouchableOpacity>
             </View>
         </View>
+
+        
     )
+
+    
 }

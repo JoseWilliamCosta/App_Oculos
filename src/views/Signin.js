@@ -141,8 +141,9 @@ const styles_login = ({
         backgroundColor: '#fff',
     },
     container: {
+        zIndex: 1,
         width: '100%',
-        height: 370,
+        height: 425,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -160,7 +161,7 @@ const styles_login = ({
         backgroundColor: '#f0f0f0',
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: '#ccc'
+        borderColor: '#ccc',
     },
     arealogo: {
         width: '100%',

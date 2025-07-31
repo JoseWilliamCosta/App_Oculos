@@ -21,6 +21,7 @@ import useUsuarioLogado from "./admin/useUsuarioLogado";
 
 // Bibliotecas do Navigation
 import { useNavigation } from '@react-navigation/native';
+import { faBorderAll } from "@fortawesome/free-solid-svg-icons";
 
 export default function AreaUsuario() {
 
@@ -47,7 +48,44 @@ export default function AreaUsuario() {
     }
 
     return (
+        
         <View style={styles.container}>
+            <View style={styles.caixacinza}>
+                
+            </View>
+
+            <View style={{
+                    position: 'absolute', 
+                    justifyContent: 'flex-start',
+                    borderRadius:15,
+                    backgroundColor: '#ff6f00ff',
+
+                    //tamanho
+                    top: 10,
+                    marginRight: 170,
+                    height:'25%',
+                    marginTop: 10,
+                    marginLeft:10,
+                    marginBottom: 10,
+                    padding: 5,
+                    paddingTop: 10,
+                    paddingBottom: 10,
+                    borderRadius: 20,
+                    width:235
+
+                }}>
+
+                {usuario.tipo === 'admin' && (
+                    <Text style={styles.caixalaranja}>DashBoard admin</Text>
+                )}
+                {usuario.tipo === 'comum' && (
+                    <Text style={styles.caixalaranja}>DashBoard comum</Text>
+                )}
+            </View>
+            
+
+                
+
             <TouchableOpacity onPress={navtoPerfilUsuario}>
                 <Text style={styles.card}>Perfil do Usuário</Text>
             </TouchableOpacity>
@@ -78,6 +116,8 @@ export default function AreaUsuario() {
 
                 </>
             )}
+                
+            
         </View>
     )
 }

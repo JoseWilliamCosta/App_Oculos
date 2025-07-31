@@ -117,7 +117,7 @@ export default function ListarUsuarios() {
                     <Text>{item.email}</Text>
                 </View>
                 <View style={styles.itemlistarows50cols}>
-                    <TouchableOpacity
+                    <TouchableOpacity style={{marginRight: 5}}
                         onPress={() => {
                             //alert(item.idusuario)
                             navigation.navigate('DadosUsuario', { idusuario: item.idusuario })
@@ -152,6 +152,7 @@ export default function ListarUsuarios() {
     }
 
     return (
+        
         <View style={styles.containerTop2}>
             <Modal
                 animationType="slide"
@@ -164,19 +165,26 @@ export default function ListarUsuarios() {
                     }}>
                     <View style={{
                         padding: 30, justifyContent: 'center',
-                        alignItems: 'center', backgroundColor: 'white'
+                        alignItems: 'center', backgroundColor: '#fa8500ff',
+                        borderWidth:3, borderColor:'#000000ff',
+                        borderRadius:15,
                     }}>
-                        <Text style={{ fontSize: 20 }}>Você quer realmente excluir o registro?</Text>
-                        <TouchableOpacity
-                            onPress={delRegistro}
-                        >
-                            <Text style={styles.button}>OK</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={fecharModal}
-                        >
-                            <Text style={styles.button}>Cancelar</Text>
-                        </TouchableOpacity>
+                        <Text style={{ fontSize: 20 }}>Deseja Confirmar Exclusão?</Text>
+                        <View style={{flexDirection: 'row', textAlign: "center"}}>
+                            
+                            <br></br>
+                            <TouchableOpacity 
+                                style={{marginRight:10}}
+                                onPress={delRegistro}
+                            >
+                                <Text style={styles.button}>OK</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={fecharModal}
+                            >
+                                <Text style={styles.button}>Cancelar</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </Modal>
@@ -186,6 +194,7 @@ export default function ListarUsuarios() {
                 renderItem={renderItem}
             />
         </View>
+        
     )
 
 }
