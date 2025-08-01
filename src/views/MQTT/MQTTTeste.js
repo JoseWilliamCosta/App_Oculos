@@ -1,7 +1,6 @@
 import Paho from 'paho-mqtt';
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-
+import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import {
     VictoryChart,
     VictoryLine,
@@ -9,133 +8,122 @@ import {
     VictoryAxis,
 } from "victory";
 
-
+// Criação do cliente MQTT
 const client = new Paho.Client('broker.emqx.io', 8083, 'reactNativeClientId_' + parseInt(Math.random() * 100000));
 
+// Série de dados para o gráfico
 const series = [
     {
-        name: "Temperatura",
-        data: Array(),
+        name: "Distância",
+        data: [],
     },
 ];
 
 export default function MQTTAula() {
+    const [tempLida, setTempLida] = useState(0);
+    const [cont, setCont] = useState(0);
+    const [valor, setValor] = useState(30);
 
-    const [tempLida, setTempLida] = useState(0)
-    const [cont, setCont] = useState(0)
 
-    /*let temperatura = new Array(30)
-    for (let index = 0; index < temperatura.length; index++) {
-        temperatura[index] = Math.random() * 50;
-    }
 
-    console.log(temperatura)*/
+    //enviar mensagem para topico api/sensor
+    const enviarNovaDistancia = () => {
+        const novaDistancia = parseFloat(valor); // ou pegue de um input
+        const message = new Paho.Message(novaDistancia.toString());
+        message.destinationName = "api/sensor";
+        client.send(message);
+    };
 
     useEffect(() => {
+
+
+
+
+        // Callback para perda de conexão
         client.onConnectionLost = (responseObject) => {
             if (responseObject.errorCode !== 0) {
                 console.error('Connection lost:', responseObject.errorMessage);
             }
         };
 
+        // Callback para mensagens recebidas
         client.onMessageArrived = (message) => {
             console.log('Message arrived:', message.payloadString, 'on topic:', message.destinationName);
-            // Process the received message here
-            setTempLida(parseInt(message.payloadString))
 
-            if(cont < 60){
-                series[0].data[cont] = tempLida
-            }else{
-                series[0].data.splice(0, 1)
-                series[0].data.push(tempLida)
+            const novaLeitura = parseFloat(message.payloadString); // Distância em cm
+            setTempLida(novaLeitura);
+
+            // Atualiza os dados do gráfico
+            if (series[0].data.length < 60) {
+                series[0].data.push(novaLeitura);
+            } else {
+                series[0].data.shift(); // Remove o mais antigo
+                series[0].data.push(novaLeitura);
             }
- 
-            setCont(() => cont + 1)
+
+            setCont(prev => prev + 1);
         };
 
+        // Conexão com o broker
         client.connect({
             onSuccess: () => {
                 console.log('Connected to MQTT broker!');
-                client.subscribe('ifrncang/temperatura'); // Subscribe to a topic
+                client.subscribe('aurora/sensor'); // mesmo tópico do ESP32
             },
             onFailure: (error) => {
                 console.error('Connection failed:', error);
             },
-            useSSL: false, // Set to true if using SSL/TLS (e.g., port 8084)
+            useSSL: false,
             timeout: 3,
         });
 
-
-
+        // Desconectar ao desmontar o componente
         return () => {
             client.disconnect();
         };
-    }, [cont]);
+    }, []);
 
-    /*const enviarMensagem = (msg) => {
-        console.log(msg)
-        const message = new Paho.Message(msg);
-        message.destinationName = 'ifrncang/led';
-        client.send(message);
-    }*/
-
+    // Função utilitária para gerar ticks dos eixos
     const arrayRange = (start, stop, step) =>
-        Array.from(
-            { length: (stop - start) / step + 1 },
-            (value, index) => start + index * step
-        );
+        Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
 
     return (
         <View style={styles.container}>
             <Text style={styles.label}>Status Recebido:</Text>
-            <Text style={styles.status}>Temperatura atual: {tempLida}</Text>
-            <Text style={styles.status}>Contador: {cont}</Text>
+            <Text style={styles.status}>Distância atual: {tempLida.toFixed(2)} cm</Text>
+            <Text style={styles.status}>Leituras: {cont}</Text>
+            <Text style={styles.status}>Botão de enviar</Text>
+            <TextInput
+                value={valor}
+                onChangeText={setValor}
+                keyboardType="numeric"  // ajuda a limitar só números no teclado
+                style={{ borderWidth: 1, padding: 5, width: 100, marginBottom: 10 }}
+            />
+            <TouchableOpacity onPress={enviarNovaDistancia}>
+                <Text>Enviar</Text>
+            </TouchableOpacity>
 
-            <VictoryChart
-                theme={VictoryTheme.clean}
-            >
+            <VictoryChart theme={VictoryTheme.clean}>
                 <VictoryAxis
                     dependentAxis
-                    tickValues={arrayRange(0, 50, 10)}
-                    tickFormat={(value) => `T: ${value} (°C)`}
+                    tickValues={arrayRange(0, 200, 20)}
+                    tickFormat={(value) => `${value} cm`}
                     style={{
-                        axis: {
-                            stroke: "transparent",
-                        },
-                        axisLabel: {
-                            fontSize: 8,
-                            padding: 50,
-                        },
-                        tickLabels: {
-                            fontSize: 8,
-                        },
-                        grid: {
-                            stroke: "#d9d9d9",
-                            size: 5,
-                        },
+                        axis: { stroke: "transparent" },
+                        axisLabel: { fontSize: 8, padding: 50 },
+                        tickLabels: { fontSize: 8 },
+                        grid: { stroke: "#d9d9d9", size: 5 },
                     }}
                 />
                 <VictoryAxis
                     tickValues={arrayRange(0, 60, 10)}
                     style={{
-                        tickLabels: {
-                            fontSize: 8,
-                        },
-                        ticks: {
-                            stroke: "#757575",
-                            size: 5,
-                        },
+                        tickLabels: { fontSize: 8 },
+                        ticks: { stroke: "#757575", size: 5 },
                     }}
                 />
-
-
                 <VictoryLine
-                    data={series[0].data.map(
-                        (d, i) => ({
-                            x: i,
-                            y: d,
-                        }),
-                    )}
+                    data={series[0].data.map((d, i) => ({ x: i, y: d }))}
                 />
             </VictoryChart>
         </View>
@@ -148,31 +136,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#fff',
+        paddingHorizontal: 10,
     },
     label: {
         fontSize: 20,
         marginBottom: 10,
     },
     status: {
-        fontSize: 26,
+        fontSize: 22,
         fontWeight: 'bold',
-        marginBottom: 30,
+        marginBottom: 15,
         color: '#444',
-    },
-    buttonContainer: {
-        flexDirection: 'row',
-        gap: 20,
-    },
-    button: {
-        backgroundColor: '#007bff',
-        paddingVertical: 12,
-        paddingHorizontal: 20,
-        borderRadius: 8,
-        marginHorizontal: 10,
-    },
-    buttonText: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: 'bold',
     },
 });

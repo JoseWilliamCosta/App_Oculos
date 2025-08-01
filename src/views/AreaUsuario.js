@@ -47,6 +47,10 @@ export default function AreaUsuario() {
         navigation.navigate('ListarOculos')
     }
 
+    const navMQTTAula = () => {
+        navigation.navigate('MQTTAula')
+    }
+
     return (
         
         <View style={styles.container}>
@@ -102,6 +106,10 @@ export default function AreaUsuario() {
 
                     <TouchableOpacity onPress={navListaOculos}>
                         <Text style={styles.card}>Listar Óculos</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={navMQTTAula}>
+                        <Text style={styles.card}>Informações oculos</Text>
                     </TouchableOpacity>
                 </>
             )}

@@ -14,7 +14,8 @@ import DadosUsuario from "./src/views/DadosUsuario";
 import ListarOculos from "./src/views/admin/ListarOculo";
 import PerfilUsuario from "./src/views/PerfilUsuario";
 import CadastroOculos from "./src/views/admin/CadastroOculos";
-//import Deteccao from "./src/views/MQTT/Deteccao";
+import Deteccao from "./src/views/MQTT/Deteccao";
+import MQTTAula from "./src/views/MQTT/MQTTTeste";
 
 // módulos internos personalizados
 import useUsuarioLogado from "./src/views/admin/useUsuarioLogado"; // Hook React personalizado
@@ -40,8 +41,9 @@ export default function App() {
         {/* Todas as rotas continuam registradas aqui */}
         <Drawer.Screen name="Signin" component={Signin} options={{ headerShown: false }} />
         <Drawer.Screen name="AreaUsuario" component={AreaUsuario} options={{ title: 'Área do Usuário' }} />
+        <Drawer.Screen name="MQTTAula" component={MQTTAula} options={{ title: 'MQTT Aula' }} />
         <Drawer.Screen name="Signup" component={Signup} options={{ title: 'Cadastrar Usuário' }} />
-        {/*<Drawer.Screen name="Deteccao" component={Deteccao} options={{ title: 'Detecção de Proximidade' }} />*/}
+        <Drawer.Screen name="Deteccao" component={Deteccao} options={{ title: 'Detecção de Proximidade' }} />
         <Drawer.Screen name="ListarUsuarios" component={ListarUsuarios} options={{ title: 'Listar Usuários', drawerItemStyle: { display: 'none' } }} />
         <Drawer.Screen name="ListarOculos" component={ListarOculos} options={{ title: 'Listar Óculos', drawerItemStyle: { display: 'none' } }} />
         <Drawer.Screen name="DadosUsuario" component={DadosUsuario} options={{ title: 'Dados do Usuário', drawerItemStyle: { display: 'none' } }} />

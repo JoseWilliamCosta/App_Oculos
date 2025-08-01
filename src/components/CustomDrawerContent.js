@@ -24,6 +24,8 @@ export default function CustomDrawerContent(props) {
 
       {usuario?.tipo === 'admin' && (
         <>
+          <DrawerItem label="Detecção" onPress={() => props.navigation.navigate('Deteccao')} />
+          <DrawerItem label="MQTTAula" onPress={() => props.navigation.navigate('MQTTAula')} />
           <DrawerItem label="Cadastrar Usuários" onPress={() => props.navigation.navigate('Signup')} />
           <DrawerItem label="Listar Usuários" onPress={() => props.navigation.navigate('ListarUsuarios')} />
           <DrawerItem label="Listar Óculos" onPress={() => props.navigation.navigate('ListarOculos')} />

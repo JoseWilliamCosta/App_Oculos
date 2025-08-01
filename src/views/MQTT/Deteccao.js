@@ -33,11 +33,11 @@ export default function Deteccao() {
 
             // Enviar para o backend
             try {
-                const tipoAlerta = distanciaDetectada < 50 ? 'alerta' : 'normal'; // lógica de exemplo
-
+                const tipoAlerta = distanciaDetectada < 20 ? 'alerta' : 'normal'; // lógica de exemplo
+                const dataAtual = new Date().toISOString().split('T')[0];
                 const payload = {
                     id_oculos: id_oculos,
-                    data_hora: new Date().toISOString(),
+                    data_hora: dataAtual,
                     distancia_detectada_cm: distanciaDetectada,
                     tipo_alerta_acionado: tipoAlerta
                 };
@@ -60,7 +60,7 @@ export default function Deteccao() {
         client.connect({
             onSuccess: () => {
                 console.log('Conectado ao broker MQTT!');
-                client.subscribe('ifrncang/temperatura');
+                client.subscribe('aurora/sensor');
             },
             onFailure: (error) => {
                 console.error('Falha na conexão:', error);
