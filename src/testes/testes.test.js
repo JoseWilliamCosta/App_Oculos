@@ -30,7 +30,6 @@ jest.mock('../views/admin/useUsuarioLogado', () => () => ({
   email: 'teste@gmail.com'
 }));
 
-// Mock do axios
 jest.mock('axios', () => ({
   post: jest.fn(() => Promise.resolve({ 
     data: { 
@@ -41,7 +40,7 @@ jest.mock('axios', () => ({
         telefone: '11999999999',
         email: 'usuario@gmail.com'
       }
-    } 
+    }
   }))
 }));
 
@@ -59,20 +58,20 @@ describe('Testes de renderização', () => {
     });
   });
 
-  it('renderiza AreaUsuario sem erros', () => {
+  it('renderizando AreaUsuario', () => {
     render(<AreaUsuario />);
   });
 
-  it('encontra o container principal em AreaUsuario', () => {
+  it('encontra o ID do AreaUsuario', () => {
     const { getByTestId } = render(<AreaUsuario />);
     expect(getByTestId('areausuario-teste')).toBeTruthy();
   });
 
-  it('renderiza PerfilUsuario sem erros', async () => {
+  it('renderizando PerfilUsuario', async () => {
     await render(<PerfilUsuario />);
   });
 
-  it('encontra o container principal em PerfilUsuario', async () => {
+  it('encontra o ID do PerfilUsuario', async () => {
     const { findByTestId } = render(<PerfilUsuario />);
     await expect(findByTestId('perfilusuario-teste')).resolves.toBeTruthy();
   });
