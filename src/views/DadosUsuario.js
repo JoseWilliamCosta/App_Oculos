@@ -104,7 +104,7 @@ export default function DadosUsuario() {
 
     return (
         <View style={styles.containerTop}>
-            <View style={styles.containerbox}>
+            <View style={styles.containerbox_editarusuario}>
                 <Text style={styles.titulo1}>Dados de Usuário</Text>
                 <Text style={styles.label}>Id. Usuário:</Text>
                 <TextInput style={styles.input}
@@ -140,7 +140,7 @@ export default function DadosUsuario() {
                 <TouchableOpacity
                     onPress={update}
                 >
-                    <Text style={styles.button}>OK</Text>
+                    <Text style={styles.button}>Atualizar Dados</Text>
                 </TouchableOpacity>
             </View>
         </View>

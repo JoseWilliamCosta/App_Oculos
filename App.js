@@ -32,7 +32,7 @@ export default function App() {
     <NavigationContainer>
       <Drawer.Navigator
         key={usuarioLogado?.idusuario || 'drawer'} // <- FORÇA RECONSTRUÇÃO
-        initialRouteName="Signin"
+        initialRouteName="AreaUsuario"
         backBehavior="history"
         drawerContent={(props) => (
           <CustomDrawerContent {...props} usuario={usuarioLogado} />

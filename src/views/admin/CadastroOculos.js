@@ -50,7 +50,7 @@ export default function CadastroOculos() {
 
     return (
         <View style={styles.containerTop}>
-            <View style={styles.containerbox}>
+            <View style={styles.containerbox_usuarios}>
                 <Text style={styles.titulo1}>Cadastro de Óculos</Text>
 
                 <Text style={styles.label}>Modelo:</Text>
@@ -61,11 +61,11 @@ export default function CadastroOculos() {
                 />
 
                 <Text style={styles.label}>Status:</Text>
-                <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+                <View style={{ flexDirection: 'row', gap: 10, marginBottom: 10 }}>
                     <TouchableOpacity
                         style={[
                             styles.button,
-                            { marginRight: 10, backgroundColor: status === 'Ativo' ? '#4CAF50' : '#ccc' }
+                            { padding: 10,  backgroundColor: status === 'Ativo' ? '#4CAF50' : '#ccc' }
                         ]}
                         onPress={() => setStatus('Ativo')}
                     >

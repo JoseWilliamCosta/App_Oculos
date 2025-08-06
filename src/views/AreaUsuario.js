@@ -62,7 +62,7 @@ export default function AreaUsuario() {
                     position: 'absolute', 
                     justifyContent: 'flex-start',
                     borderRadius:15,
-                    backgroundColor: '#ff6f00ff',
+                    backgroundColor: '#fea815',
 
                     //tamanho
                     top: 10,

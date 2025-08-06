@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import CadastroOculos from "../views/admin/CadastroOculos";
 
 
 export default styles = StyleSheet.create({
@@ -29,33 +30,64 @@ export default styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 20,
         fontWeight: 'bold',
-       
+    
 
     },
 
-
+    //estlizacao signup
+     containerbox: {
+        width: '100%',
+        height: '650px',
+        backgroundColor: '#fea815',
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40,
+        padding: 10,
+        marginTop: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    box_cadastro: {
+        width: '80%',
+        height: '70%',
+        backgroundColor: '#fea815',
+    },
+    titulo2: {
+        fontSize: 14,
+        fontWeight: 'light',
+        textAlign: "start",
+        width: '72%',
+    },
     containerTop: {
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: "center",
-        backgroundColor: '#fa8500ff',
-        //borderWidth: 1
     },
-
-
+    containerbox_usuarios: {
+        width: '100%',
+        height: '800px',
+        backgroundColor: '#fea815',
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40,
+        padding: 10,
+        marginTop: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+       containerbox_editarusuario: {
+        width: '100%',
+        height: '800px',
+        backgroundColor: '#fea815',
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40,
+        padding: 10,
+        marginTop: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     containerTop2:{
         flex: 1,
         padding:'20px',
         backgroundColor: '#ffffffff'
-
-    },
-
-
-    containerbox: {
-    
-        marginTop: '50px',
-        padding: 10,
-        width: '350px'
     },
 
     containercols: {
@@ -97,17 +129,17 @@ export default styles = StyleSheet.create({
 
 
     label: {
-        fontSize: 20,
-        fontWeight: 'bold',
+        fontSize: 18,
+        fontWeight: 'light',
+        textAlign: "start",
         
     },
-
 
     input: {
         backgroundColor: 'white',
         fontSize: 20,
-        padding: 3,
-        borderRadius: 15,
+        padding: 7,
+        borderRadius: 10,
     },
 
 
@@ -130,7 +162,7 @@ export default styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 20,
         fontWeight: 'bold',
-        backgroundColor: '#ff6f00ff',
+        backgroundColor: '#fea815',
         marginTop: 10,
         marginBottom: 10,
         padding: 5,
