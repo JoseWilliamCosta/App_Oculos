@@ -3,16 +3,14 @@ import { render } from '@testing-library/react-native';
 import AreaUsuario from '../views/AreaUsuario';
 import PerfilUsuario from '../views/PerfilUsuario';
 
-// Mock completo das dependências
 jest.mock('@react-navigation/native', () => ({
   useNavigation: () => ({ 
     navigate: jest.fn(),
     addListener: jest.fn((event, callback) => {
-      // Simula o evento 'focus' sendo chamado imediatamente
       if (event === 'focus') {
         callback();
       }
-      return jest.fn(); // Retorna uma função para unsubscribe
+      return jest.fn(); 
     }),
   }),
   useRoute: () => ({ params: {} }),
@@ -49,7 +47,6 @@ jest.mock('axios', () => ({
 
 describe('Testes de renderização', () => {
   beforeAll(() => {
-    // Configura o AsyncStorage mock para retornar um usuário
     require('@react-native-async-storage/async-storage').getItem.mockImplementation((key) => {
       if (key === 'usuarioLogado') {
         return Promise.resolve(JSON.stringify({
