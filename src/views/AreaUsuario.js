@@ -53,7 +53,7 @@ export default function AreaUsuario() {
 
     return (
         
-        <View style={styles.container}>
+        <View testID="areausuario-teste" style={styles.container}>
             <View style={styles.caixacinza}>
                 
             </View>

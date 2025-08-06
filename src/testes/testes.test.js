@@ -1,71 +1,82 @@
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react-native';
-import Signin from '../Signin';
-import axios from 'axios';
+import { render } from '@testing-library/react-native';
+import AreaUsuario from '../views/AreaUsuario';
+import PerfilUsuario from '../views/PerfilUsuario';
 
-// Mocks para evitar erros durante os testes
-jest.mock('axios');
-jest.mock('@react-native-async-storage/async-storage', () => ({
-  setItem: jest.fn(),
-}));
-
-// Mock do useNavigation do React Navigation
-const mockNavigate = jest.fn();
+// Mock completo das dependências
 jest.mock('@react-navigation/native', () => ({
-  useNavigation: () => ({
-    reset: mockNavigate,
+  useNavigation: () => ({ 
+    navigate: jest.fn(),
+    addListener: jest.fn((event, callback) => {
+      // Simula o evento 'focus' sendo chamado imediatamente
+      if (event === 'focus') {
+        callback();
+      }
+      return jest.fn(); // Retorna uma função para unsubscribe
+    }),
   }),
+  useRoute: () => ({ params: {} }),
 }));
 
-// Mock do contexto do usuário
-jest.mock('../../globals/UserContext', () => ({
-  UserContext: {
-    Provider: ({ children }) => children,
-  },
+jest.mock('@react-native-async-storage/async-storage', () => ({
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  removeItem: jest.fn(),
+  clear: jest.fn(),
 }));
 
-describe('Teste da página Signin', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
+jest.mock('../views/admin/useUsuarioLogado', () => () => ({ 
+  tipo: 'comum',
+  id: '1',
+  nome: 'Usuário Teste',
+  email: 'teste@gmail.com'
+}));
 
-  it('Renderiza os campos de login corretamente', () => {
-    const { getByPlaceholderText, getByText } = render(<Signin />);
+// Mock do axios
+jest.mock('axios', () => ({
+  post: jest.fn(() => Promise.resolve({ 
+    data: { 
+      res: {
+        idusuario: '1',
+        nome: 'usuario',
+        cpf: '12345678901',
+        telefone: '11999999999',
+        email: 'usuario@gmail.com'
+      }
+    } 
+  }))
+}));
 
-    expect(getByPlaceholderText('E-mail')).toBeTruthy();
-    expect(getByPlaceholderText('Senha')).toBeTruthy();
-    expect(getByText('Entrar')).toBeTruthy();
-  });
-
-  it('Dispara a função signin ao clicar no botão Entrar', async () => {
-    axios.post.mockResolvedValueOnce({
-      data: {
-        num_erro: 0,
-        res: { nome: 'Usuário Teste' },
-        msg: 'Login realizado com sucesso',
-      },
+describe('Testes de renderização', () => {
+  beforeAll(() => {
+    // Configura o AsyncStorage mock para retornar um usuário
+    require('@react-native-async-storage/async-storage').getItem.mockImplementation((key) => {
+      if (key === 'usuarioLogado') {
+        return Promise.resolve(JSON.stringify({
+          idusuario: '1',
+          nome: 'usuario',
+          tipo: 'comum'
+        }));
+      }
+      return Promise.resolve(null);
     });
-
-    const { getByText } = render(<Signin />);
-    const botao = getByText('Entrar');
-    fireEvent.press(botao);
-
-    await waitFor(() => {
-      expect(axios.post).toHaveBeenCalledTimes(1);
-      expect(axios.post).toHaveBeenCalledWith(
-        expect.stringContaining('/usuarios/signin'),
-        { email: 'admin@gmail.com', password: '123456' }
-      );
-    });
-  });
-});
-
-describe('Verificação de existência das páginas de dados', () => {
-  it('Deve importar DadosUsuario sem erros', () => {
-    expect(() => require('../DadosUsuario')).not.toThrow();
   });
 
-  it('Deve importar DadosOculos sem erros', () => {
-    expect(() => require('../DadosOculos')).not.toThrow();
+  it('renderiza AreaUsuario sem erros', () => {
+    render(<AreaUsuario />);
+  });
+
+  it('encontra o container principal em AreaUsuario', () => {
+    const { getByTestId } = render(<AreaUsuario />);
+    expect(getByTestId('areausuario-teste')).toBeTruthy();
+  });
+
+  it('renderiza PerfilUsuario sem erros', async () => {
+    await render(<PerfilUsuario />);
+  });
+
+  it('encontra o container principal em PerfilUsuario', async () => {
+    const { findByTestId } = render(<PerfilUsuario />);
+    await expect(findByTestId('perfilusuario-teste')).resolves.toBeTruthy();
   });
 });

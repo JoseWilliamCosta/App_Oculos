@@ -62,7 +62,7 @@ export default function PerfilUsuario() {
     
     if (!usuario) return null // ou um loader "Carregando..."
     return (
-        <ScrollView>
+        <ScrollView testID='perfilusuario-teste'>
         <View style={styles.container}>
             <Text style={styles.titulo}>Perfil do Usuário</Text>
 
