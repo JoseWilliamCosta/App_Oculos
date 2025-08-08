@@ -9,7 +9,7 @@ import {
 } from "victory";
 
 // Criação do cliente MQTT
-const client = new Paho.Client('broker.emqx.io', 8083, 'reactNativeClientId_' + parseInt(Math.random() * 100000));
+const client = new Paho.Client('10.44.1.35', 9001, 'reactNativeClientId_' + parseInt(Math.random() * 100000));
 
 // Série de dados para o gráfico
 const series = [
