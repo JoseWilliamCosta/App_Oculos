@@ -63,25 +63,31 @@ export default function AreaUsuario() {
                     <TouchableOpacity style={estilos.botao} onPress={navtoPerfilUsuario}>
                         <Text style={estilos.botaoTexto}>Perfil</Text>
                     </TouchableOpacity>
+                    {usuario.tipo === 'admin' && (
+                        <>
 
-                    <TouchableOpacity style={estilos.botao} onPress={navtoSignup}>
-                        <Text style={estilos.botaoTexto}>Cadastrar</Text>
-                    </TouchableOpacity>
+                            <TouchableOpacity style={estilos.botao} onPress={navtoSignup}>
+                                <Text style={estilos.botaoTexto}>Cadastrar</Text>
+                            </TouchableOpacity>
 
-                    <TouchableOpacity style={estilos.botao} onPress={navListaOculos}>
-                        <Text style={estilos.botaoTexto}>Listar Óculos</Text>
-                    </TouchableOpacity>
+                            <TouchableOpacity style={estilos.botao} onPress={navListaOculos}>
+                                <Text style={estilos.botaoTexto}>Listar Óculos</Text>
+                            </TouchableOpacity>
 
-                    <TouchableOpacity style={estilos.botao} onPress={navListUsuarios}>
-                        <Text style={estilos.botaoTexto}>Listar Usuário</Text>
-                    </TouchableOpacity>
+                            <TouchableOpacity style={estilos.botao} onPress={navListUsuarios}>
+                                <Text style={estilos.botaoTexto}>Listar Usuário</Text>
+                            </TouchableOpacity>
+                        </>
+                    )}
                 </View>
-
-                {/* Botão maior */}
-                <TouchableOpacity style={estilos.botaoGrande} onPress={navMQTTAula}>
-                    <Text style={estilos.botaoTexto}>Informações do Óculos</Text>
-                </TouchableOpacity>
-
+                {usuario.tipo === 'admin' && (
+                    <>
+                        {/* Botão maior */}
+                        <TouchableOpacity style={estilos.botaoGrande} onPress={navMQTTAula}>
+                            <Text style={estilos.botaoTexto}>Informações do Óculos</Text>
+                        </TouchableOpacity>
+                    </>
+                )}
                 {/* Rodapé */}
                 <Text style={estilos.rodape}>Aurora/ version2®</Text>
             </View>
@@ -90,7 +96,7 @@ export default function AreaUsuario() {
 }
 
 const estilos = StyleSheet.create({
-   background: {
+    background: {
         flex: 1,
         backgroundColor: '#fff',
         justifyContent: 'flex-start',
@@ -99,9 +105,9 @@ const estilos = StyleSheet.create({
         position: 'absolute',
         left: -45,
         top: 80,
-        width: 120, 
-        height: 1000, 
-        opacity: 0.15, 
+        width: 120,
+        height: 1000,
+        opacity: 0.15,
         zIndex: 0,
     },
     container: {
@@ -125,7 +131,7 @@ const estilos = StyleSheet.create({
     },
     iconeMenu: {
         width: 32,
-        height: 60,     
+        height: 60,
         marginLeft: 10,
     },
     grid: {
