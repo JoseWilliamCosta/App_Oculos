@@ -41,6 +41,13 @@ export default function AreaUsuario() {
     }
 
     return (
+<<<<<<< HEAD
+        
+        <View testID="areausuario-teste" style={styles.container}>
+            <View style={styles.caixacinza}>
+                
+            </View>
+=======
         <View style={estilos.background}>
             {/* Imagem de fundo posicionada à esquerda, menor e transparente */}
             <Image
@@ -57,6 +64,7 @@ export default function AreaUsuario() {
                         style={estilos.iconeMenu}
                     />
                 </View>
+>>>>>>> 7ce8d0b (feito area principal)
 
                 {/* Grid de botões */}
                 <View style={estilos.grid}>
@@ -153,7 +161,7 @@ const estilos = StyleSheet.create({
         backgroundColor: '#ffb300',
         paddingVertical: 25,
         borderRadius: 10,
-        width: '300px',
+        width: '75%',
         alignItems: 'center',
         marginTop: 15,
         shadowColor: '#000',
