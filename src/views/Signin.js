@@ -124,9 +124,9 @@ export default function Signin() {
                     >
                         <Text style={styles_login.button}>Entrar</Text>
                     </TouchableOpacity>
+                    
                 </View>
             </View>
-
         </ScrollView >
     )
 
