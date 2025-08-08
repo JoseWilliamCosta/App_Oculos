@@ -1,19 +1,10 @@
 // Biblioteca básica
 import React from "react";
-
-//Import temporário para armazenar as variáveis que ficarão no UseContext
 import { useState } from "react";
+import { View, Text, TouchableOpacity, StyleSheet, Image, ImageBackground } from "react-native";
 
-// Imports de componentes para IG do React
-import { View, Text, TextInput, Image, TouchableOpacity } from "react-native"
-
-// Import de estilos da IG
-import styles from '../globals/GlobalStyles'
-
-//Imports para acesso ao BD
-import axios from 'axios'
-
-// Imports para parâmetros do Sistema
+// Imports para acesso ao BD
+import axios from 'axios';
 import { server } from '../globals/GlobalVars';
 
 // Hook para esconder/mostra botões
@@ -21,15 +12,13 @@ import useUsuarioLogado from "./admin/useUsuarioLogado";
 
 // Bibliotecas do Navigation
 import { useNavigation } from '@react-navigation/native';
-import { faBorderAll } from "@fortawesome/free-solid-svg-icons";
 
 export default function AreaUsuario() {
 
-    const navigation = useNavigation()
+    const navigation = useNavigation();
+    const usuario = useUsuarioLogado();
 
-    const usuario = useUsuarioLogado()
-
-    if (!usuario) return null // ou um loader "Carregando..."
+    if (!usuario) return null;
 
     const navtoPerfilUsuario = () => {
         navigation.navigate('PerfilUsuario')
@@ -52,80 +41,136 @@ export default function AreaUsuario() {
     }
 
     return (
-        
-        <View testID="areausuario-teste" style={styles.container}>
-            <View style={styles.caixacinza}>
-                
-            </View>
+        <View style={estilos.background}>
+            {/* Imagem de fundo posicionada à esquerda, menor e transparente */}
+            <Image
+                source={require('../img/ativo2.png')}
+                style={estilos.fundoImg}
+                resizeMode="contain"
+            />
+            <View style={estilos.container}>
+                {/* Título com imagem */}
+                <View style={estilos.tituloContainer}>
+                    <Text style={estilos.titulo}>Menu</Text>
+                    <Image
+                        source={require('../img/ativo2.png')}
+                        style={estilos.iconeMenu}
+                    />
+                </View>
 
-            <View style={{
-                    position: 'absolute', 
-                    justifyContent: 'flex-start',
-                    borderRadius:15,
-                    backgroundColor: '#fea815',
-
-                    //tamanho
-                    top: 10,
-                    marginRight: 170,
-                    height:'25%',
-                    marginTop: 10,
-                    marginLeft:10,
-                    marginBottom: 10,
-                    padding: 5,
-                    paddingTop: 10,
-                    paddingBottom: 10,
-                    borderRadius: 20,
-                    width:235
-
-                }}>
-
-                {usuario.tipo === 'admin' && (
-                    <Text style={styles.caixalaranja}>DashBoard admin</Text>
-                )}
-                {usuario.tipo === 'comum' && (
-                    <Text style={styles.caixalaranja}>DashBoard comum</Text>
-                )}
-            </View>
-            
-
-                
-
-            <TouchableOpacity onPress={navtoPerfilUsuario}>
-                <Text style={styles.card}>Perfil do Usuário</Text>
-            </TouchableOpacity>
-
-            {usuario.tipo === 'admin' && (
-                <>
-                    <TouchableOpacity onPress={navtoSignup}>
-                        <Text style={styles.card}>Cadastrar Usuário</Text>
+                {/* Grid de botões */}
+                <View style={estilos.grid}>
+                    <TouchableOpacity style={estilos.botao} onPress={navtoPerfilUsuario}>
+                        <Text style={estilos.botaoTexto}>Perfil</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={navListUsuarios}>
-                        <Text style={styles.card}>Listar Usuários</Text>
+                    <TouchableOpacity style={estilos.botao} onPress={navtoSignup}>
+                        <Text style={estilos.botaoTexto}>Cadastrar</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={navListaOculos}>
-                        <Text style={styles.card}>Listar Óculos</Text>
+                    <TouchableOpacity style={estilos.botao} onPress={navListaOculos}>
+                        <Text style={estilos.botaoTexto}>Listar Óculos</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={navMQTTAula}>
-                        <Text style={styles.card}>Informações oculos</Text>
+                    <TouchableOpacity style={estilos.botao} onPress={navListUsuarios}>
+                        <Text style={estilos.botaoTexto}>Listar Usuário</Text>
                     </TouchableOpacity>
-                </>
-            )}
+                </View>
 
-            {usuario.tipo === 'comum' && (
-                <>
-
-                <TouchableOpacity /*onPress={}*/>
-                        <Text style={styles.card}>!!</Text>
+                {/* Botão maior */}
+                <TouchableOpacity style={estilos.botaoGrande} onPress={navMQTTAula}>
+                    <Text style={estilos.botaoTexto}>Informações do Óculos</Text>
                 </TouchableOpacity>
-                    <Text>Você é um usuário comum</Text>
 
-                </>
-            )}
-                
-            
+                {/* Rodapé */}
+                <Text style={estilos.rodape}>Aurora/ version2®</Text>
+            </View>
         </View>
     )
 }
+
+const estilos = StyleSheet.create({
+   background: {
+        flex: 1,
+        backgroundColor: '#fff',
+        justifyContent: 'flex-start',
+    },
+    fundoImg: {
+        position: 'absolute',
+        left: -45,
+        top: 80,
+        width: 120, 
+        height: 1000, 
+        opacity: 0.15, 
+        zIndex: 0,
+    },
+    container: {
+        flex: 1,
+        backgroundColor: 'transparent',
+        alignItems: 'center',
+        paddingVertical: 20,
+        zIndex: 1,
+    },
+    tituloContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 20,
+    },
+    titulo: {
+        fontSize: 45,
+        fontFamily: 'sans-serif',
+        fontWeight: 'bold',
+        color: '#000'
+    },
+    iconeMenu: {
+        width: 32,
+        height: 60,     
+        marginLeft: 10,
+    },
+    grid: {
+        marginTop: 20,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        gap: 10
+    },
+    botao: {
+        backgroundColor: '#ffb300',
+        paddingVertical: 30,
+        paddingHorizontal: 30,
+        borderRadius: 12,
+        width: 140,
+        alignItems: 'center',
+        margin: 8,
+        shadowColor: '#000',
+        shadowOffset: { width: 2, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+        elevation: 5
+    },
+    botaoGrande: {
+        backgroundColor: '#ffb300',
+        paddingVertical: 25,
+        borderRadius: 10,
+        width: '75%',
+        alignItems: 'center',
+        marginTop: 15,
+        shadowColor: '#000',
+        shadowOffset: { width: 2, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+        elevation: 5
+    },
+    botaoTexto: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: '#000'
+    },
+    rodape: {
+        marginTop: 20,
+        fontSize: 14,
+        color: '#555'
+    }
+});

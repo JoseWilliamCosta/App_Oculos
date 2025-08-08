@@ -40,7 +40,7 @@ export default function App() {
       >
         {/* Todas as rotas continuam registradas aqui */}
         <Drawer.Screen name="Signin" component={Signin} options={{ headerShown: false }} />
-        <Drawer.Screen name="AreaUsuario" component={AreaUsuario} options={{ title: 'Área do Usuário' }} />
+        <Drawer.Screen name="AreaUsuario" component={AreaUsuario} options={{ title: 'Área Usuário' }} />
         <Drawer.Screen name="MQTTAula" component={MQTTAula} options={{ title: 'MQTT Aula' }} />
         <Drawer.Screen name="Signup" component={Signup} options={{ title: 'Cadastrar Usuário' }} />
         <Drawer.Screen name="Deteccao" component={Deteccao} options={{ title: 'Detecção de Proximidade' }} />
