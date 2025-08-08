@@ -153,7 +153,7 @@ const estilos = StyleSheet.create({
         backgroundColor: '#ffb300',
         paddingVertical: 25,
         borderRadius: 10,
-        width: '75%',
+        width: '300px',
         alignItems: 'center',
         marginTop: 15,
         shadowColor: '#000',
