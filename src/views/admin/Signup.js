@@ -54,7 +54,7 @@ export default function Signup() {
     } catch (e) {
       //showError(e)
       console.log(e);
-      alert(e);
+      alert("Todos os campos devem ser preenchidos !!");
     }
   };
 
