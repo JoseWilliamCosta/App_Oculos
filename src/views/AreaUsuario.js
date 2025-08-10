@@ -149,11 +149,12 @@ const estilos = StyleSheet.create({
         width: 140,
         alignItems: 'center',
         margin: 8,
-        shadowColor: '#000',
-        shadowOffset: { width: 2, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 3,
-        elevation: 5
+        // Tentativa de dar mais profundidade
+        elevation: 3, // Android
+        shadowColor: '#000', // iOS
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.50,
+        shadowRadius: 5,
     },
     botaoGrande: {
         backgroundColor: '#ffb300',
@@ -162,11 +163,13 @@ const estilos = StyleSheet.create({
         width: '75%',
         alignItems: 'center',
         marginTop: 15,
-        shadowColor: '#000',
-        shadowOffset: { width: 2, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 3,
-        elevation: 5
+
+        // Tentativa de dar mais profundidade
+        elevation: 3, // Android
+        shadowColor: '#000', // iOS
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.50,
+        shadowRadius: 5,
     },
     botaoTexto: {
         fontSize: 20,

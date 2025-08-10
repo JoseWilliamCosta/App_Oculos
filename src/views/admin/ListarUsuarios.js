@@ -48,7 +48,7 @@ export default function ListarUsuarios() {
     );
 
     React.useEffect(() => {
-        if(confirmDel){
+        if (confirmDel) {
             //rem()
             //alert("Remove funcionando")
             rem(idUsuarioRem)
@@ -58,34 +58,34 @@ export default function ListarUsuarios() {
     }, [confirmDel])
 
 
-    
-
-        const rem = async (idusuario) => {
-                //console.log('Entrou \n')
-                try {
-                    console.log(`${server}/usuarios/rem`)
-                    const res = await axios.post(`${server}/usuarios/rem`,
-                        {
-                            idusuario: idusuario,
-                        }
-                    )
-
-                    if (res.data.num_erro == 0) {
-                        alert(res.data.msg)
-                        list()
-                    }
 
 
-                    if (res.data.num_erro == 1) {
-                        alert(res.data.msg_erro)
-                    }
-
-
-                } catch (e) {
-                    //showError(e)
-                    console.log(e)
+    const rem = async (idusuario) => {
+        //console.log('Entrou \n')
+        try {
+            console.log(`${server}/usuarios/rem`)
+            const res = await axios.post(`${server}/usuarios/rem`,
+                {
+                    idusuario: idusuario,
                 }
+            )
+
+            if (res.data.num_erro == 0) {
+                alert(res.data.msg)
+                list()
             }
+
+
+            if (res.data.num_erro == 1) {
+                alert(res.data.msg_erro)
+            }
+
+
+        } catch (e) {
+            //showError(e)
+            console.log(e)
+        }
+    }
 
     const list = async () => {
         //console.log('Entrou \n')
@@ -107,79 +107,63 @@ export default function ListarUsuarios() {
     }
 
 
-    
 
-    const renderItem = ({ item }) => {
-        return (
-            <View style={styles.containercols}>
-                <View style={styles.itemlistacols50cols}>
-                    <Text>{item.nome}</Text>
-                    <Text>{item.email}</Text>
-                </View>
-                <View style={styles.itemlistarows50cols}>
-                    <TouchableOpacity style={{marginRight: 5}}
-                        onPress={() => {
-                            //alert(item.idusuario)
-                            navigation.navigate('DadosUsuario', { idusuario: item.idusuario })
-                        }
-                        }
-                    >
-                        <Text style={styles.button}>Editar</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => {
-                            //alert(item.idusuario)
-                            setModalVisible(() => true)
-                            setIdUsuarioRem(() => item.idusuario)
-                        }
-                        }
-                    >
-                        <Text style={styles.button}>Excluir</Text>
-                    </TouchableOpacity>
-                </View>
+
+    const renderItem = ({ item }) => (
+        <View style={styles.containercols}>
+            <View style={styles.itemlistacols50cols}>
+                <Text>{item.nome}</Text>
+                <Text>{item.email}</Text>
             </View>
-        )
-    }
+            <View style={styles.itemlistarows50cols}>
+                <TouchableOpacity
+                    style={stilo_listaUser.botaoEditar}
+                    onPress={() => navigation.navigate('DadosUsuario', { idusuario: item.idusuario })}
+                >
+                    <Text style={styles.button}>Editar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={stilo_listaUser.botaoExcluir}
+                    onPress={() => {
+                        setModalVisible(true);
+                        setIdUsuarioRem(item.idusuario);
+                    }}
+                >
+                    <Text style={styles.button2}>Excluir</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
+    );
 
     const delRegistro = () => {
-        setModalVisible(() => false)
-        setConfirmDel(() => true)
-    }
+        setModalVisible(false);
+        setConfirmDel(true);
+    };
 
     const fecharModal = () => {
-        setModalVisible(() => false)
-        setConfirmDel(() => false)
-    }
+        setModalVisible(false);
+        setConfirmDel(false);
+    };
 
     return (
-        
         <View style={styles.containerTop2}>
             <Modal
                 animationType="slide"
                 transparent={true}
                 visible={modalVisible}
             >
-                <View style={{
-                        flex: 1, justifyContent: 'center',
-                        alignItems: 'center'
-                    }}>
-                    <View style={{
-                        padding: 30, justifyContent: 'center',
-                        alignItems: 'center', backgroundColor: '#fa8500ff',
-                        borderWidth:3, borderColor:'#000000ff',
-                        borderRadius:15,
-                    }}>
-                        <Text style={{ fontSize: 20 }}>Deseja Confirmar Exclusão?</Text>
-                        <View style={{flexDirection: 'row', textAlign: "center"}}>
-                            
-                            <br></br>
-                            <TouchableOpacity 
-                                style={{marginRight:10}}
+                <View style={stilo_listaUser.modalContainer}>
+                    <View style={stilo_listaUser.modalContent}>
+                        <Text style={stilo_listaUser.modalTexto}>Deseja Confirmar Exclusão?</Text>
+                        <View style={stilo_listaUser.modalBotoes}>
+                            <TouchableOpacity
+                                style={stilo_listaUser.modalBotaoOK}
                                 onPress={delRegistro}
                             >
                                 <Text style={styles.button}>OK</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
+                                style={stilo_listaUser.modalBotaoCancelar}
                                 onPress={fecharModal}
                             >
                                 <Text style={styles.button}>Cancelar</Text>
@@ -190,11 +174,45 @@ export default function ListarUsuarios() {
             </Modal>
             <FlatList
                 data={dados}
-                keyExtractor={user => user.idusuario}
+                keyExtractor={user => user.idusuario.toString()}
                 renderItem={renderItem}
             />
         </View>
-        
-    )
-
+    );
 }
+
+// Estilos para minitela
+const stilo_listaUser = {
+    botaoEditar: {
+        marginRight: 9
+    },
+    botaoExcluir: {
+        marginRight: 0
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    modalContent: {
+        padding: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#ffb300',
+        borderWidth: 3,
+        borderColor: '#000000ff',
+        borderRadius: 15
+    },
+    modalTexto: {
+        fontSize: 20
+    },
+    modalBotoes: {
+        flexDirection: 'row',
+        textAlign: 'center',
+        marginTop: 10
+    },
+    modalBotaoOK: {
+        marginRight: 10
+    },
+    modalBotaoCancelar: {}
+}; 

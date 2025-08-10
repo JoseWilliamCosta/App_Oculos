@@ -78,6 +78,7 @@ export default function ListarOculos() {
                 </View>
                 <View style={styles.itemlistarows50cols}>
                     <TouchableOpacity
+                        style={stilo_listaOculos.botaoEditar}
                         onPress={() => {
                             navigation.navigate('DadosOculos', { id_oculos: item.id_oculos });
                         }}
@@ -85,12 +86,13 @@ export default function ListarOculos() {
                         <Text style={styles.button}>Editar</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
+                        style={stilo_listaOculos.botaoExcluir}
                         onPress={() => {
                             setModalVisible(true);
                             setIdOculosRem(item.id_oculos);
                         }}
                     >
-                        <Text style={styles.button}>Excluir</Text>
+                        <Text style={styles.button2}>Excluir</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -114,15 +116,25 @@ export default function ListarOculos() {
                 transparent={true}
                 visible={modalVisible}
             >
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <View style={{ padding: 30, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
-                        <Text style={{ fontSize: 20 }}>Você quer realmente excluir o registro?</Text>
-                        <TouchableOpacity onPress={delRegistro}>
-                            <Text style={styles.button}>OK</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={fecharModal}>
-                            <Text style={styles.button}>Cancelar</Text>
-                        </TouchableOpacity>
+                <View style={stilo_listaOculos.modalContainer}>
+                    <View style={stilo_listaOculos.modalContent}>
+                        <Text style={stilo_listaOculos.modalTexto}>
+                            Deseja Confirmar Exclusão?
+                        </Text>
+                        <View style={stilo_listaOculos.modalBotoes}>
+                            <TouchableOpacity
+                                style={stilo_listaOculos.modalBotaoOK}
+                                onPress={delRegistro}
+                            >
+                                <Text style={styles.button}>OK</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={stilo_listaOculos.modalBotaoCancelar}
+                                onPress={fecharModal}
+                            >
+                                <Text style={styles.button}>Cancelar</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </Modal>
@@ -134,3 +146,39 @@ export default function ListarOculos() {
         </View>
     );
 }
+
+// Estilos para minitela
+const stilo_listaOculos = {
+    botaoEditar: {
+        marginRight: 9
+    },
+    botaoExcluir: {
+        marginRight: 0
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    modalContent: {
+        padding: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#ffb300',
+        borderWidth: 3,
+        borderColor: '#000000ff',
+        borderRadius: 15
+    },
+    modalTexto: {
+        fontSize: 20
+    },
+    modalBotoes: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: 10
+    },
+    modalBotaoOK: {
+        marginRight: 10
+    },
+    modalBotaoCancelar: {}
+};

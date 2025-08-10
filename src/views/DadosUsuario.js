@@ -104,44 +104,59 @@ export default function DadosUsuario() {
 
     return (
         <View style={styles.containerTop}>
+            <View
+                style={{
+                    justifyContent: "center",
+                    alignItems: "center",  // centraliza horizontalmente a view interna
+                    width: "100%",
+                    height: "20%",
+                    padding: 20,
+                }}
+            >
+                <View style={{ width: '80%', maxWidth: 400, alignItems: 'flex-start' }}>
+                    <Text style={[styles.titulo1, { textAlign: "left" }]}>
+                        Atualize seus dados!
+                    </Text>
+                    <Text style={[styles.titulo2, { textAlign: "left" }]}>
+                        Rápido e prático
+                    </Text>
+                </View>
+            </View>
+
             <View style={styles.containerbox_editarusuario}>
-                <Text style={styles.titulo1}>Dados de Usuário</Text>
-                <Text style={styles.label}>Id. Usuário:</Text>
-                <TextInput style={styles.input}
-                    value={idusuario}
-                    //onChangeText={(idUsuario => setIdUsuario(idUsuario))}
-                />
-                <Text style={styles.label}>Nome:</Text>
-                <TextInput style={styles.input}
-                    value={nome}
-                    onChangeText={(nome => setNome(nome))}
-                />
-                <Text style={styles.label}>CPF:</Text>
-                <TextInput style={styles.input}
-                    value={cpf}
-                    onChangeText={(cpf => setCPF(cpf))}
-                />
-                <Text style={styles.label}>Telefone:</Text>
-                <TextInput style={styles.input}
-                    value={telefone}
-                    onChangeText={(telefone => setTelefone(telefone))}
-                />
-                <Text style={styles.label}>E-mail:</Text>
-                <TextInput style={styles.input}
-                    value={email}
-                    onChangeText={(email => setEmail(email))}
-                />
-                <Text style={styles.label}>Password:</Text>
-                <TextInput style={styles.input}
-                    value={password}
-                    onChangeText={password => setPassword(password)}
-                    secureTextEntry={true}
-                />
-                <TouchableOpacity
-                    onPress={update}
-                >
-                    <Text style={styles.button}>Atualizar Dados</Text>
-                </TouchableOpacity>
+                <View style={styles.box_editar}>
+                    <Text style={styles.label}>Nome:</Text>
+                    <TextInput style={styles.input}
+                        value={nome}
+                        onChangeText={(nome => setNome(nome))}
+                    />
+                    <Text style={styles.label}>CPF:</Text>
+                    <TextInput style={styles.input}
+                        value={cpf}
+                        onChangeText={(cpf => setCPF(cpf))}
+                    />
+                    <Text style={styles.label}>Telefone:</Text>
+                    <TextInput style={styles.input}
+                        value={telefone}
+                        onChangeText={(telefone => setTelefone(telefone))}
+                    />
+                    <Text style={styles.label}>E-mail:</Text>
+                    <TextInput style={styles.input}
+                        value={email}
+                        onChangeText={(email => setEmail(email))}
+                    />
+                    <Text style={styles.label}>Password:</Text>
+                    <TextInput style={styles.input}
+                        value={password}
+                        onChangeText={password => setPassword(password)}
+                        secureTextEntry={true}
+                    />
+                    <TouchableOpacity
+                        onPress={update}
+                    >
+                        <Text style={styles.button}>Atualizar Dados</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     )

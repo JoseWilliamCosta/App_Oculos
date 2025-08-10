@@ -108,6 +108,7 @@ export default function PerfilUsuario() {
                         <Text style={styles.buttonText}>Sair</Text>
                     </TouchableOpacity>
 
+
                     {usuario.tipo === 'comum' && (
                         <TouchableOpacity
                             onPress={() => navigation.navigate('CadastroOculos', { idusuario: idusuario })}

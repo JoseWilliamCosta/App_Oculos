@@ -3,36 +3,7 @@ import CadastroOculos from "../views/admin/CadastroOculos";
 
 
 export default styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        
-    },
 
-    caixacinza: { //Area do usuario
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '50%',
-        height: '90%',
-        backgroundColor: '#b3b3b3ff',
-        borderTopRightRadius: 20,
-        borderBottomRightRadius: 20,
-        justifyContent: 'flex-start',
-        paddingTop: 30,
-        zIndex: 0,
-        
-    },
-
-    caixalaranja: {
-        color: 'white',
-        textAlign: "center",
-        fontSize: 20,
-        fontWeight: 'bold',
-    
-
-    },
 
     //estlizacao signup
      containerbox: {
@@ -54,8 +25,7 @@ export default styles = StyleSheet.create({
     titulo2: {
         fontSize: 14,
         fontWeight: 'light',
-        textAlign: "start",
-        width: '72%',
+        
     },
     containerTop: {
         flex: 1,
@@ -73,10 +43,15 @@ export default styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    box_editar: {
+        width: '80%',
+        height: '70%',
+        marginBottom: 100,
+    },
        containerbox_editarusuario: {
         width: '100%',
         height: '800px',
-        backgroundColor: '#fea815',
+        backgroundColor: '#ffb300',
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
         padding: 10,
@@ -96,7 +71,7 @@ export default styles = StyleSheet.create({
         marginBottom: 10,
         padding: 10,
         borderRadius: 10,
-        backgroundColor: '#fa8500ff',
+        backgroundColor: '#ffb300',
 
 
         // Tentativa de dar mais profundidade
@@ -129,17 +104,20 @@ export default styles = StyleSheet.create({
 
 
     label: {
-        fontSize: 18,
-        fontWeight: 'light',
+        fontSize: 20,
+        fontWeight: 'bold',
         textAlign: "start",
+        marginBottom: 2
         
     },
 
     input: {
         backgroundColor: 'white',
-        fontSize: 20,
+        fontSize: 18,
+        fontWeight: 'light',
         padding: 7,
         borderRadius: 10,
+        marginBottom: 13
     },
 
 
@@ -147,10 +125,29 @@ export default styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 15,
         fontWeight: 'bold',
-        backgroundColor: '#0b0b0bff',
+        backgroundColor: '#4CAF50',
         marginTop: 10,
         marginBottom: 10,
-        padding: 5,
+        padding: 9,
+        borderRadius: 10,
+        color: 'white',
+
+        // Tentativa de dar mais profundidade
+        elevation: 3, // Android
+        shadowColor: '#000', // iOS
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.50,
+        shadowRadius: 5,
+
+    },
+    button2: {
+        textAlign: "center",
+        fontSize: 15,
+        fontWeight: 'bold',
+        backgroundColor: '#E53935',
+        marginTop: 10,
+        marginBottom: 10,
+        padding: 9,
         borderRadius: 10,
         color: 'white'
 
@@ -162,7 +159,7 @@ export default styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 20,
         fontWeight: 'bold',
-        backgroundColor: '#fea815',
+        backgroundColor: '#ffb300',
         marginTop: 10,
         marginBottom: 10,
         padding: 5,

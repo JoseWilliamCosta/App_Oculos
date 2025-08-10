@@ -67,13 +67,15 @@ export default function Signup() {
           width: "100%",
           height: "20%",
           flexDirection: "column",
-          padding: 20,
+          padding: 20
         }}
       >
-        <Text style={[styles.titulo1, { textAlign: "left", lineHeight: 30 }]}>
+        <View style={{ width: '80%', maxWidth: 400, alignItems: 'flex-start' }}>
+        <Text style={[styles.titulo1, { textAlign: "left"}]}>
           Faça parte da{"\n"}nossa comunidade!
         </Text>
-        <Text style={styles.titulo2}>Crie seu login rápido e prático</Text>
+        <Text style={[styles.titulo2, {textAlign: "left"}]}>Crie seu login rápido e prático</Text>
+        </View>
       </View>
 
       <View style={styles.containerbox}>
@@ -109,7 +111,6 @@ export default function Signup() {
             onChangeText={(password) => setPassword(password)}
             secureTextEntry={true}
           />
-          <br></br>
 
           <TouchableOpacity
             style={{ width: "250px", alignSelf: "center" }}
