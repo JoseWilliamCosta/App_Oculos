@@ -113,7 +113,6 @@ export default function Signup() {
           />
 
           <TouchableOpacity
-            style={{ width: "250px", alignSelf: "center" }}
             onPress={signup}
           >
             <Text style={styles.button}>Cadastrar</Text>

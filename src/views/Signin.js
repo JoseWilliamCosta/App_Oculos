@@ -1,13 +1,11 @@
-// Biblioteca básica
-import React from "react";
 
-//Import temporário para armazenar as variáveis que ficarão no UseContext
-import { useState } from "react";
-import { useContext } from "react";
+
+//Import temporário para armazenar as variáveis que ficarão no UseContext, e bibliotecas básicas.
+import React, { useState, useContext } from 'react';
 import { UserContext } from "../globals/UserContext";
 
 // Imports de componentes para IG do React
-import { View, Text, TextInput, Image, TouchableOpacity, ScrollView } from "react-native"
+import { View, Text, TextInput, Image, TouchableOpacity, ScrollView, StyleSheet } from "react-native"
 
 
 // Imports de ícones do FontAwesome
@@ -23,7 +21,7 @@ import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 // Import de estilos da IG
-import styles from '../globals/GlobalStyles'
+// Não esta sendo utilizado import styles from '../globals/GlobalStyles'
 
 //Imports para acesso ao BD
 import axios from 'axios'
@@ -33,8 +31,7 @@ import { server } from '../globals/GlobalVars';
 
 // Bibliotecas do Navigation
 import { useNavigation } from '@react-navigation/native';
-import { prerenderToNodeStream } from "react-dom/static";
-import { height, width } from "@fortawesome/free-solid-svg-icons/fa0";
+
 
 
 
@@ -122,7 +119,7 @@ export default function Signin() {
                     <TouchableOpacity
                         onPress={signin}
                     >
-                        <Text style={styles_login.button}>Entrar</Text>
+                        <Text testID='Bsignin' style={styles_login.button}>Entrar</Text>
                     </TouchableOpacity>
                     
                 </View>
@@ -132,7 +129,7 @@ export default function Signin() {
 
 }
 
-const styles_login = ({
+const styles_login = StyleSheet.create({
     container_login: {
         justifyContent: 'center',
         width: '100%',
@@ -200,10 +197,10 @@ const styles_login = ({
         backgroundColor: 'transparent',
         borderWidth: 0,
         paddingLeft: 0,
-        outline: 'none',
+        //Remove causa erros outline: 'none',
     },
     button: {
-        width: '200px',
+        width: 200,
         height: 50,
         backgroundColor: 'black',
         color: '#fff',

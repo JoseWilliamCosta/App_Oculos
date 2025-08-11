@@ -1,15 +1,14 @@
 import { StyleSheet } from "react-native";
-import CadastroOculos from "../views/admin/CadastroOculos";
 
 
 export default styles = StyleSheet.create({
 
 
     //estlizacao signup
-     containerbox: {
+    containerbox: {
         width: '100%',
-        height: '650px',
-        backgroundColor: '#fea815',
+        height: 650,
+        backgroundColor: '#ffb300',
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
         padding: 10,
@@ -20,12 +19,29 @@ export default styles = StyleSheet.create({
     box_cadastro: {
         width: '80%',
         height: '70%',
-        backgroundColor: '#fea815',
+    },
+    box_oculos: {
+        width: '80%',
+        height: '70%',
+        marginBottom: 100,
+        textAlign: 'center',
+        
+    },
+    containerbox_oculos: {
+        width: '100%',
+        height: 700,
+        backgroundColor: '#ffb300',
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40,
+        padding: 10,
+        marginTop: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     titulo2: {
         fontSize: 14,
         fontWeight: 'light',
-        
+
     },
     containerTop: {
         flex: 1,
@@ -34,8 +50,8 @@ export default styles = StyleSheet.create({
     },
     containerbox_usuarios: {
         width: '100%',
-        height: '800px',
-        backgroundColor: '#fea815',
+        height: 800,
+        backgroundColor: '#ffb300',
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
         padding: 10,
@@ -48,9 +64,9 @@ export default styles = StyleSheet.create({
         height: '70%',
         marginBottom: 100,
     },
-       containerbox_editarusuario: {
+    containerbox_editarusuario: {
         width: '100%',
-        height: '800px',
+        height: 800,
         backgroundColor: '#ffb300',
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
@@ -59,9 +75,10 @@ export default styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    containerTop2:{
+
+    containerTop2: {
         flex: 1,
-        padding:'20px',
+        padding: 20,
         backgroundColor: '#ffffffff'
     },
 
@@ -80,20 +97,20 @@ export default styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.50,
         shadowRadius: 5,
-        
+
     },
 
 
-    itemlistarows50cols:{
+    itemlistarows50cols: {
         flexDirection: 'row',
         width: '50%',
         justifyContent: 'center',
-        
+
     },
-    itemlistacols50cols:{ //aparentemente isso aqui serve pra dar mais espaço
+    itemlistacols50cols: { //aparentemente isso aqui serve pra dar mais espaço
         flexDirection: 'column',
         width: '50%',
-        
+
         justifyContent: 'center'
     },
     titulo1: {
@@ -108,7 +125,7 @@ export default styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: "start",
         marginBottom: 2
-        
+
     },
 
     input: {
@@ -140,6 +157,18 @@ export default styles = StyleSheet.create({
         shadowRadius: 5,
 
     },
+    button1: {
+        textAlign: "center",
+        fontSize: 15,
+        fontWeight: 'bold',
+        backgroundColor: '#4CAF50',
+        marginTop: 10,
+        marginBottom: 10,
+        padding: 9,
+        borderRadius: 10,
+        color: 'white',
+
+    },
     button2: {
         textAlign: "center",
         fontSize: 15,
@@ -166,7 +195,7 @@ export default styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10,
         borderRadius: 20,
-        width:250
+        width: 250
     }
 
 

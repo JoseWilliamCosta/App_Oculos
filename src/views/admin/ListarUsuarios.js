@@ -120,7 +120,7 @@ export default function ListarUsuarios() {
                     style={stilo_listaUser.botaoEditar}
                     onPress={() => navigation.navigate('DadosUsuario', { idusuario: item.idusuario })}
                 >
-                    <Text style={styles.button}>Editar</Text>
+                    <Text style={styles.button1}>Editar</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={stilo_listaUser.botaoExcluir}

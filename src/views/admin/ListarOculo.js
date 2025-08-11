@@ -83,7 +83,7 @@ export default function ListarOculos() {
                             navigation.navigate('DadosOculos', { id_oculos: item.id_oculos });
                         }}
                     >
-                        <Text style={styles.button}>Editar</Text>
+                        <Text style={styles.button1}>Editar</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={stilo_listaOculos.botaoExcluir}

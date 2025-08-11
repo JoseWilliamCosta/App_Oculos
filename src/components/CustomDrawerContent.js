@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     marginVertical: 4,
   },
   activeButton: {
-    backgroundColor: '#ffb300', // azul escuro para ativo
+    backgroundColor: '#ffb300',
     borderRadius: 8,
     marginVertical: 4,
   },

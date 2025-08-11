@@ -42,6 +42,7 @@ export default function PerfilUsuario() {
             setEmail(user.email)
         } catch (e) {
             console.error('Erro ao buscar usuário:', e)
+            alert('Erro ao buscar usuário')
         }
     }
 
@@ -51,12 +52,20 @@ export default function PerfilUsuario() {
             setOculos(response.data.res)
         } catch (e) {
             console.error('Erro ao buscar óculos:', e)
+            alert("Erro ao buscar óculos")
         }
     }
-    
-    if (!usuario) return null 
 
- return (
+
+    if (!usuario) {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text>Carregando...</Text>
+            </View>
+        );
+    }
+
+    return (
         <ScrollView contentContainerStyle={styles.scrollContainer}
         testID="perfilusuario-teste"
         >
@@ -72,7 +81,7 @@ export default function PerfilUsuario() {
                 <Image
                     source={require('../img/per.arturo.jpg')}
                     style={styles.fotoPerfil}
-                  
+
                 />
             </View>
 
@@ -85,7 +94,7 @@ export default function PerfilUsuario() {
                 </View>
                 <View style={styles.linhaDados}>
                     <Text style={styles.label}>Telefone: <Text style={styles.info}>{telefone}</Text></Text>
-                  
+
                 </View>
                 <View style={styles.linhaDados}>
                     <Text style={styles.label}>E-mail: <Text style={styles.info}>{email}</Text></Text>
@@ -112,7 +121,7 @@ export default function PerfilUsuario() {
                     </TouchableOpacity>
 
 
-                    {usuario.tipo === 'comum' && (
+                    {usuario.tipo === 'comum' && oculos.length === 0 && (
                         <TouchableOpacity
                             onPress={() => navigation.navigate('CadastroOculos', { idusuario: idusuario })}
                             style={[styles.buttonContainer, { backgroundColor: '#2196F3' }]}
@@ -124,23 +133,32 @@ export default function PerfilUsuario() {
             </View>
 
             {/* Versão abaixo do card */}
-           
+
 
             {/* Lista de óculos, se for usuário comum */}
             {usuario.tipo === 'comum' && (
                 <>
                     <Text style={styles.subtitulo}>Seus Óculos:</Text>
-                    <FlatList
-                        data={oculos}
-                        keyExtractor={item => item.id_oculos.toString()}
-                        renderItem={({ item }) => (
-                            <View style={styles.card}>
-                                <Text>Modelo: {item.modelo}</Text>
-                                <Text>Status: {item.status}</Text>
-                                <Text>Firmware: {item.firmware_version}</Text>
+                    {oculos.length === 0 ? (
+                        <Text style={styles.semOculos}>Nenhum óculos cadastrado.</Text>
+                    ) : (
+                        oculos.map(item => (
+                            <View key={item.id_oculos.toString()} style={styles.cardOculos}>
+                                <View style={styles.linhaDadosOculos}>
+                                    <Text style={styles.labelOculos}>Modelo:</Text>
+                                    <Text style={styles.infoOculos}>{item.modelo}</Text>
+                                </View>
+                                <View style={styles.linhaDadosOculos}>
+                                    <Text style={styles.labelOculos}>Status:</Text>
+                                    <Text style={styles.infoOculos}>{item.status}</Text>
+                                </View>
+                                <View style={styles.linhaDadosOculos}>
+                                    <Text style={styles.labelOculos}>Firmware:</Text>
+                                    <Text style={styles.infoOculos}>{item.firmware_version}</Text>
+                                </View>
                             </View>
-                        )}
-                    />
+                        ))
+                    )}
                 </>
             )}
             <View style={styles.versaoContainer}>
@@ -171,7 +189,7 @@ const styles = StyleSheet.create({
     },
     perfilContainer: {
         marginTop: 40,
-        marginBottom: -90, 
+        marginBottom: -90,
         alignItems: 'center',
         zIndex: 2,
     },
@@ -190,7 +208,7 @@ const styles = StyleSheet.create({
         marginTop: 50,
         width: '90%',
         height: 350,
-        elevation: 4,   
+        elevation: 4,
         zIndex: 1,
     },
     linhaDados: {
@@ -272,5 +290,55 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginTop: 10,
         backgroundColor: '#fff'
-    }
+    },
+
+    // Oculos
+
+    semOculos: {
+        fontSize: 16,
+        color: '#777',
+        fontStyle: 'italic',
+        marginTop: 10,
+        marginBottom: 20,
+        textAlign: 'center',
+        width: '90%',
+    },
+
+    cardOculos: {
+        backgroundColor: '#ffb300',
+        borderRadius: 15,
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        marginVertical: 8,
+        width: '90%',
+        elevation: 3,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+    },
+
+    linhaDadosOculos: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 6,
+        paddingVertical: 4,
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgba(0,0,0,0.1)',
+    },
+
+    labelOculos: {
+        fontWeight: '700',
+        fontSize: 16,
+        color: '#222',
+        width: '45%',
+    },
+
+    infoOculos: {
+        fontWeight: '400',
+        fontSize: 16,
+        color: '#333',
+        width: '50%',
+        textAlign: 'right',
+    },
 });

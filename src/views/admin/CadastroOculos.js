@@ -50,76 +50,98 @@ export default function CadastroOculos() {
 
     return (
         <View style={styles.containerTop}>
-            <View style={styles.containerbox_usuarios}>
-                <Text style={styles.titulo1}>Cadastro de Óculos</Text>
 
-                <Text style={styles.label}>Modelo:</Text>
-                <TextInput
-                    style={styles.input}
-                    value={modelo}
-                    onChangeText={setModelo}
-                />
+            {/* Cabeçalho adaptado */}
+            <View
+                style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "15%", // reduzido comparado ao Signup
+                    flexDirection: "column",
+                    padding: 20
+                }}
+            >
+                <View style={{ width: "80%", maxWidth: 400, alignItems: "flex-start" }}>
+                    <Text style={[styles.titulo1, { textAlign: "left" }]}>
+                        Cadastre seu{"\n"}óculo!
+                    </Text>
+                    <Text style={[styles.titulo2, { textAlign: "left" }]}>
+                        Preencha as informações abaixo
+                    </Text>
+                </View>
+            </View>
 
-                <Text style={styles.label}>Status:</Text>
-                <View style={{ flexDirection: 'row', gap: 10, marginBottom: 10 }}>
-                    <TouchableOpacity
-                        style={[
-                            styles.button,
-                            { padding: 10,  backgroundColor: status === 'Ativo' ? '#4CAF50' : '#ccc' }
-                        ]}
-                        onPress={() => setStatus('Ativo')}
-                    >
-                        <Text style={{ color: '#fff' }}>Ativo</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={[
-                            styles.button,
-                            { backgroundColor: status === 'Desativado' ? '#ee0909ff' : '#ccc' }
-                        ]}
-                        onPress={() => setStatus('Desativado')}
-                    >
-                        <Text style={{ color: '#fff' }}>Desativado</Text>
+            <View style={styles.containerbox_oculos}>
+                <View style={styles.box_oculos}>
+                    <Text style={styles.label}>Modelo:</Text>
+                    <TextInput
+                        style={styles.input}
+                        value={modelo}
+                        onChangeText={setModelo}
+                    />
+
+                    <Text style={styles.label}>Status:</Text>
+                    <View style={{ flexDirection: 'row', gap: 10, marginBottom: 10 }}>
+                        <TouchableOpacity
+                            style={[
+                                styles.button,
+                                { padding: 10, backgroundColor: status === 'Ativo' ? '#4CAF50' : '#737373ff' }
+                            ]}
+                            onPress={() => setStatus('Ativo')}
+                        >
+                            <Text style={{ color: '#fff' }}>Ativo</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[
+                                styles.button,
+                                { backgroundColor: status === 'Desativado' ? '#ee0909ff' : '#737373ff' }
+                            ]}
+                            onPress={() => setStatus('Desativado')}
+                        >
+                            <Text style={{ color: '#fff' }}>Desativado</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <Text style={styles.label}>Firmware Version:</Text>
+                    <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+                        <TouchableOpacity
+                            style={[
+                                styles.button,
+                                { backgroundColor: firmwareVersion === '1.0.0.0' ? '#4CAF50' : '#737373ff' }
+                            ]}
+                            onPress={() => setFirmwareVersion('1.0.0.0')}
+                        >
+                            <Text style={{ color: '#fff' }}>1.0.0.0</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <Text style={styles.label}>Modo de Feedback:</Text>
+                    <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+                        <TouchableOpacity
+                            style={[
+                                styles.button,
+                                { marginRight: 10, backgroundColor: modoFeedback === 'som' ? '#4CAF50' : '#737373ff' }
+                            ]}
+                            onPress={() => setModoFeedback('som')}
+                        >
+                            <Text style={{ color: '#fff' }}>Som</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[
+                                styles.button,
+                                { backgroundColor: modoFeedback === 'vibracao' ? '#4CAF50' : '#737373ff' }
+                            ]}
+                            onPress={() => setModoFeedback('vibracao')}
+                        >
+                            <Text style={{ color: '#fff' }}>Vibração</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <TouchableOpacity onPress={cadastrarOculos}>
+                        <Text style={styles.button}>Cadastrar</Text>
                     </TouchableOpacity>
                 </View>
-
-                <Text style={styles.label}>Firmware Version:</Text>
-                <View style={{ flexDirection: 'row', marginBottom: 10 }}>
-                    <TouchableOpacity
-                        style={[
-                            styles.button,
-                            { backgroundColor: firmwareVersion === '1.0.0.0' ? '#4CAF50' : '#ccc' }
-                        ]}
-                        onPress={() => setFirmwareVersion('1.0.0.0')}
-                    >
-                        <Text style={{ color: '#fff' }}>1.0.0.0</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <Text style={styles.label}>Modo de Feedback:</Text>
-                <View style={{ flexDirection: 'row', marginBottom: 10 }}>
-                    <TouchableOpacity
-                        style={[
-                            styles.button,
-                            { marginRight: 10, backgroundColor: modoFeedback === 'som' ? '#4CAF50' : '#ccc' }
-                        ]}
-                        onPress={() => setModoFeedback('som')}
-                    >
-                        <Text style={{ color: '#fff' }}>Som</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={[
-                            styles.button,
-                            { backgroundColor: modoFeedback === 'vibracao' ? '#4CAF50' : '#ccc' }
-                        ]}
-                        onPress={() => setModoFeedback('vibracao')}
-                    >
-                        <Text style={{ color: '#fff' }}>Vibração</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <TouchableOpacity onPress={cadastrarOculos}>
-                    <Text style={styles.button}>Cadastrar</Text>
-                </TouchableOpacity>
             </View>
         </View>
     );

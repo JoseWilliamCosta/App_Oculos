@@ -68,7 +68,8 @@ export default function App() {
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                   <Image
                     source={require('./src/img/logo_aurora.png')}
-                    style={{ width: 200, height: 80, resizeMode: 'contain' }}
+                    style={{ width: 200, height: 80 }}
+                    resizeMode="contain"
                   />
                 </View>
               ),
