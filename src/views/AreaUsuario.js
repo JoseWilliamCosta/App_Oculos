@@ -41,7 +41,7 @@ export default function AreaUsuario() {
     }
 
     return (
-        <View style={estilos.background}>
+        <View style={estilos.background} testID="areausuario-teste">
             {/* Imagem de fundo posicionada à esquerda, menor e transparente */}
             <Image
                 source={require('../img/ativo2.png')}

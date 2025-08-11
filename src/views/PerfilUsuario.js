@@ -57,7 +57,9 @@ export default function PerfilUsuario() {
     if (!usuario) return null 
 
  return (
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <ScrollView contentContainerStyle={styles.scrollContainer}
+        testID="perfilusuario-teste"
+        >
             {/* Logo de fundo */}
             <Image
                 source={require('../img/ativo2.png')}
@@ -92,6 +94,7 @@ export default function PerfilUsuario() {
                 {/* Botões em linha */}
                 <View style={styles.linhaBotoes}>
                     <TouchableOpacity
+                        testID="edit-button" 
                         onPress={() => navigation.navigate('DadosUsuario', { idusuario: idusuario })}
                         style={[styles.buttonContainer, { backgroundColor: '#4CAF50' }]}
                     >
