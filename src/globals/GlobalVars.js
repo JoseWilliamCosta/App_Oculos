@@ -1,3 +1,3 @@
-const server = 'http://10.40.2.16:3000'
+const server = 'http://192.168.100.65:3000'
 
 export {server}

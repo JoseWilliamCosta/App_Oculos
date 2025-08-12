@@ -1,18 +1,22 @@
 import React from 'react';
-import { render, fireEvent, waitFor, screen } from '@testing-library/react-native';
+import { render, fireEvent, waitFor, screen, act } from '@testing-library/react-native';
 import AreaUsuario from '../views/AreaUsuario';
 import PerfilUsuario from '../views/PerfilUsuario';
 import Signin from '../views/Signin';
 import { UserProvider } from '../globals/UserContext';
 
+
 // Mocks globais
 global.alert = jest.fn();
 const mockNavigate = jest.fn();
 const mockAddListener = jest.fn((event, callback) => {
-  if (event === 'focus') callback();
+  if (event === 'focus') {
+    callback(); // chama síncrono para que fique dentro do act no teste
+  }
   return jest.fn();
 });
 
+// Mock de navegação
 jest.mock('@react-navigation/native', () => ({
   useNavigation: () => ({
     navigate: mockNavigate,
@@ -21,6 +25,7 @@ jest.mock('@react-navigation/native', () => ({
   useRoute: () => ({ params: {} }),
 }));
 
+// Mock de AsyncStorage
 jest.mock('@react-native-async-storage/async-storage', () => ({
   getItem: jest.fn((key) => {
     if (key === 'usuarioLogado') {
@@ -39,6 +44,7 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
   clear: jest.fn(),
 }));
 
+// Mock hook admin
 jest.mock('../views/admin/useUsuarioLogado', () => () => ({
   tipo: 'comum',
   id: '1',
@@ -46,8 +52,8 @@ jest.mock('../views/admin/useUsuarioLogado', () => () => ({
   email: 'teste@gmail.com',
 }));
 
+// Mock de axios
 import axios from 'axios';
-
 jest.mock('axios');
 
 axios.post.mockImplementation((url) => {
@@ -69,13 +75,16 @@ axios.post.mockImplementation((url) => {
       data: { res: [] },
     });
   }
-  // Resposta padrão para outras chamadas
   return Promise.resolve({ data: {} });
 });
 
-//---------------testando se as telas abrem corretamente ao logar -------------------------------------------------//
+//--------------- Testando se as telas abrem corretamente ao logar -------------------------------------------------//
 
 describe('testando se as telas abrem corretamente ao logar', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   beforeAll(() => {
     require('@react-native-async-storage/async-storage').getItem.mockImplementation((key) => {
       if (key === 'usuarioLogado') {
@@ -91,7 +100,6 @@ describe('testando se as telas abrem corretamente ao logar', () => {
     });
   });
 
-  // Testa se a tela Signin aparece
   it('renderizando signin', async () => {
     render(
       <UserProvider>
@@ -99,37 +107,37 @@ describe('testando se as telas abrem corretamente ao logar', () => {
       </UserProvider>
     );
 
-    // Verifica se o botão de entrar está aparecendo
-    expect(screen.getByTestId('Bsignin')).toBeOnTheScreen();
+    await waitFor(() => {
+      expect(screen.getByTestId('Bsignin')).toBeTruthy();
+    }, { timeout: 2000 });
 
-    // ativa o evento de click no botão
     fireEvent.press(screen.getByTestId('Bsignin'));
   });
 
-  // Renderiza a tela AreaUsuario e espera os efeitos
   it('renderizando AreaUsuario', async () => {
     render(<AreaUsuario />);
 
-    // Aguarda algum elemento que deve aparecer após carregamento
     await waitFor(() => {
       expect(screen.getByTestId('areausuario-teste')).toBeTruthy();
-    });
+    }, { timeout: 2000 });
   });
 
-  // Encontra o ID para ver se o elemento específico na area do usuario pode ser visto
   it('encontra o ID do AreaUsuario', async () => {
     render(<AreaUsuario />);
 
     await waitFor(() => {
       expect(screen.getByTestId('areausuario-teste')).toBeTruthy();
-      expect(screen.getByTestId('Bperfil')).toBeOnTheScreen();
-    });
+      expect(screen.getByTestId('Bperfil')).toBeTruthy();
+    }, { timeout: 2000 });
 
-    // Pressionar botão de perfil
-    fireEvent.press(screen.getByTestId('Bperfil'));
+    await act(async () => {
+      fireEvent.press(screen.getByTestId('Bperfil'));
+    });
   });
 
-  // Renderiza a pagina de perfil, espera carregamento
+
+  // Agora os essa parte do teste causo aqueles avisos( warnings ) \/\/\/\/
+
   it('renderizando PerfilUsuario', async () => {
     render(
       <UserProvider>
@@ -137,6 +145,13 @@ describe('testando se as telas abrem corretamente ao logar', () => {
       </UserProvider>
     );
 
-    await waitFor(() => expect(screen.getByTestId('perfilusuario-teste')).toBeTruthy());
+    await waitFor(() => {
+      expect(screen.getByTestId('perfilusuario-teste')).toBeTruthy();
+      expect(screen.getByText(/Nome:/i)).toBeTruthy();
+    }, { timeout: 10000 });
   });
+
+  // Agora os essa parte do teste causo aqueles avisos(  warnings ) /\/\/\/\
 });
+
+

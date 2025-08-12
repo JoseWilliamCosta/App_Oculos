@@ -246,7 +246,7 @@ const estilos = StyleSheet.create({
     cartaoUsuario: {
         backgroundColor: '#ffb300',
         borderRadius: 20,
-        width: 300,
+        width: 310,
         height: 120, // mais baixo
         flexDirection: 'row', // imagem e infos lado a lado
         alignItems: 'center',
