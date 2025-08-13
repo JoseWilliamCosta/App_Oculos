@@ -50,6 +50,7 @@ export default function CustomDrawerContent(props) {
     <DrawerContentScrollView {...props} contentContainerStyle={styles.container}>
       <DrawerButton label="Perfil" routeName="PerfilUsuario" icon={faUser} />
       <DrawerButton label="Área do Usuário" routeName="AreaUsuario" icon={faHome} />
+      <DrawerButton label="MQTT Dados" routeName="MQTTAula" icon={faMicrochip} />
 
       {usuario?.tipo === 'admin' && (
         <>
@@ -57,7 +58,7 @@ export default function CustomDrawerContent(props) {
           <DrawerButton label="Listar Usuários" routeName="ListarUsuarios" icon={faUsers} />
           <DrawerButton label="Listar Óculos" routeName="ListarOculos" icon={faGlasses} />
           <DrawerButton label="Detecção" routeName="Deteccao" icon={faEye} />
-          <DrawerButton label="MQTT Dados" routeName="MQTTAula" icon={faMicrochip} />
+          
         </>
       )}
 
